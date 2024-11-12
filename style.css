@@ -105,30 +105,48 @@ h1 {
 
 /* Terminal window look */
 .terminal {
-    background-color: rgba(0, 0, 0, 0.8); /* Dark background */
-    color: #00FF00; /* Green text */
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #00FF00;
     font-family: 'Courier New', monospace;
     padding: 10px;
     border: 2px solid #00FF00;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-    width: 80%; /* Adjust width */
+    width: 80%;
     margin: 0 auto;
-    height: 90px; /* Fixed height for three lines of text */
+    height: 120px; /* Increased height */
     font-size: 20px;
     white-space: pre-wrap;
-    overflow: hidden; /* No scroll effect */
+    overflow-y: auto; /* Enable vertical scrolling */
+    scroll-behavior: smooth; /* Smooth scrolling */
 }
 
+/* Style the scrollbar */
+.terminal::-webkit-scrollbar {
+    width: 8px;
+}
 
+.terminal::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.terminal::-webkit-scrollbar-thumb {
+    background: #00FF00;
+    border-radius: 4px;
+}
+
+.terminal::-webkit-scrollbar-thumb:hover {
+    background: #00CC00;
+}
+
+/* Modify the paragraph style to allow wrapping */
 .terminal p {
     font-family: 'Courier New', Courier, monospace;
     font-size: 18px;
     color: #00ff00;
     margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 100%; /* Ensures content stays inside terminal */
+    white-space: pre-wrap; /* Changed from nowrap to pre-wrap */
+    width: 100%;
 }
 
 /* Hover effect for terminal commands */

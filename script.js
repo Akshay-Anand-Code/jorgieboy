@@ -34,7 +34,7 @@ setInterval(drawMatrix, 35);
 
 // Typing effect with sound
 const terminalText = [
-    "Welcome to the Shadow Syndicate",
+    "Let's say you as a user",
     "A new force is rising from the digital shadows...",
     // Additional lines omitted for brevity
     "Are You Ready to Join?"
@@ -48,6 +48,11 @@ const typingSound = new Audio("sounds/typing.mp3");
 typingSound.loop = true;
 
 function startTyping() {
+    // Reset indexes before starting
+    terminalIndex = 0;
+    charIndex = 0;
+    // Reset sound
+    typingSound.currentTime = 0;
     typingSound.play().catch(error => console.log("Sound playback requires user interaction."));
     typeText();
 }
@@ -56,12 +61,16 @@ function typeText() {
     if (charIndex < terminalText[terminalIndex].length) {
         terminalElement.innerHTML += terminalText[terminalIndex][charIndex];
         charIndex++;
+        // Auto-scroll to the bottom
+        terminalElement.scrollTop = terminalElement.scrollHeight;
         setTimeout(typeText, 50);
     } else {
         if (terminalIndex < terminalText.length - 1) {
             terminalIndex++;
             charIndex = 0;
             terminalElement.innerHTML += "<br>"; // Add new line
+            // Auto-scroll to the bottom
+            terminalElement.scrollTop = terminalElement.scrollHeight;
             setTimeout(typeText, 300);
         } else {
             typingSound.pause();
@@ -69,9 +78,6 @@ function typeText() {
         }
     }
 }
-
-
-
 
 // Handle "CYPHR IT" button animation and progress
 const cyphrButton = document.querySelector('.cyphr-button');
@@ -100,9 +106,13 @@ function updateProgress(progress) {
 
 // Button click logic to trigger progress, sound, and typing effect
 cyphrButton.addEventListener('click', () => {
+    // Reset progress
     let progress = 0;
-    terminalElement.innerHTML = ''; // Clear the terminal before starting
-    startTyping(); // Start the typing effect and play music
+    updateProgress(0);  // Reset progress bar to 0
+    
+    // Clear terminal and reset typing
+    terminalElement.innerHTML = '';
+    startTyping();  // This now includes reset of indexes and sound
 
     const progressInterval = setInterval(() => {
         if (progress < 1) {
