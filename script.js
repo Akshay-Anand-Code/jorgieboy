@@ -34,10 +34,10 @@ setInterval(drawMatrix, 35);
 
 // Typing effect with sound
 const terminalText = [
-    "Let's say you as a user",
-    "A new force is rising from the digital shadows...",
-    // Additional lines omitted for brevity
-    "Are You Ready to Join?"
+    "initializing cyphr ai...",
+    "encrypting...",
+    "svhkpun hnlua mpslz...",
+    "pa'z aptl av ahrl jvuayvs."
 ];
 
 let terminalIndex = 0;
