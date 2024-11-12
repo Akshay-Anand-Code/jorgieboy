@@ -34,10 +34,10 @@ setInterval(drawMatrix, 35);
 
 // Typing effect with sound
 const terminalText = [
-    "initializing cyphr ai...",
+    "welcome to matrix",
     "encrypting...",
-    "svhkpun hnlua mpslz...",
-    "pa'z aptl av ahrl jvuayvs."
+    "processing",
+    "which pill you would take blue or red?"
 ];
 
 let terminalIndex = 0;
