@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyphr</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <audio id="typing-sound" preload="auto">
+        <source src="sounds/typing.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <canvas id="matrix"></canvas>
+    <div class="container">
+        <div class="logo-container">
+            <img src="images/real_logo.JPEG" alt="Cyphr Logo" class="logo-image">
+        </div>
+        <h1>CYPHR</h1>
+        <div class="menu-links">
+            <a href="https://homepage-link.com" class="logo-link">
+                <img src="images/dex.PNG" class="logo-image" width="10">
+            </a>
+            <a href="https://reserve-link.com" class="logo-link">
+                <img src="images/Telegram.PNG" class="logo-image">
+            </a>
+            <a href="https://map-link.com" class="logo-link">
+                <img src="images/X.PNG" class="logo-image">
+            </a>
+            <a href="https://special-link.com" class="logo-link">
+                <img src="images/pump.PNG" class="logo-image">
+            </a>
+        </div>
+        
+        <div class="terminal">
+            <p id="line-1"></p>
+            <p id="line-2"></p>
+            <p id="line-3"></p>
+            <p id="line-4"></p>
+            <p id="line-5"></p>
+        
+            <!-- Hidden initially -->
+            
+        </div>
+        
+    </div>
+
+    <!-- Button and Progress Bar below content -->
+    <div class="button-container">
+        <button id="cyphr-btn" class="cyphr-button">CYPHR</button>
+        <div class="progress-bar">
+            <div class="progress-cubes-container">
+                <!-- Cubes will be added dynamically by JS -->
+            </div>
+            <div class="progress-percentage">0%</div>
+        </div>
+
+        <div class="contract-box">
+            <p><strong>Contract Address:</strong> 0x1234567890abcdef1234567890abcdef12345678</p>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div id="cursor"></div>
+
+    <script>
+        let cursor = document.querySelector('#cursor');
+let body = document.querySelector('body');
+let lastMoveTime = 0;
+
+document.onmousemove = function (e) {
+    const currentTime = Date.now();
+    if (currentTime - lastMoveTime < 100) return; // Only move every 100 ms for performance
+
+    cursor.style.top = e.pageY + 'px';
+    cursor.style.left = e.pageX + 'px';
+
+    body.style.backgroundPositionX = e.pageX / -4 + 'px';
+    body.style.backgroundPositionY = e.pageY / -4 + 'px';
+
+    const element = document.createElement('div');
+    element.className = 'element';
+    element.style.left = `${e.pageX}px`;
+    element.style.top = `${e.pageY}px`;
+    element.textContent = generateRandomBinary(3); // Assign random binary immediately
+    document.body.appendChild(element);
+
+    setTimeout(() => {
+        element.style.opacity = '0';
+        element.style.transform = 'scale(0.5)';
+    }, 50);
+
+    setTimeout(() => {
+        element.remove();
+    }, 1000);
+
+    lastMoveTime = currentTime;
+};
+
+function generateRandomBinary(length) {
+    return Array.from({ length }, () => (Math.random() < 0.5 ? '0' : '1')).join('');
+}
+
+    </script>
+</body>
+
+</html>
