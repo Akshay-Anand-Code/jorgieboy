@@ -17,48 +17,43 @@
 
     <canvas id="matrix"></canvas>
     <div class="container">
-        <div class="logo-container">
-            <img src="images/eye.png" alt="Cyphr Logo" class="logo-image">
-        </div>
-        <h1>MATRIX</h1>
-        <div class="menu-links">
-            <a href="https://dexscreener.com/" class="logo-link">
-                <img src="images/dex.PNG" class="logo-image" width="10">
-            </a>
-           
-            <a href="https://x.com/home" class="logo-link">
-                <img src="images/X.PNG" class="logo-image">
-            </a>
-            <a href="https://pump.fun/board" class="logo-link">
-                <img src="images/pump.PNG" class="logo-image">
-            </a>
-        </div>
-        
-        <div class="terminal">
-            <p id="line-1"></p>
-            <p id="line-2"></p>
-            <p id="line-3"></p>
-            <p id="line-4"></p>
-            <p id="line-5"></p>
-        
-            <!-- Hidden initially -->
-            
-        </div>
-        
-    </div>
-
-    <!-- Button and Progress Bar below content -->
-    <div class="button-container">
-        <button id="cyphr-btn" class="cyphr-button">DECRYPT</button>
-        <div class="progress-bar">
-            <div class="progress-cubes-container">
-                <!-- Cubes will be added dynamically by JS -->
+        <div class="header-section">
+            <div class="logo-and-title">
+                <img src="images/eye.png" alt="Cyphr Logo" class="logo-image">
+                <h1>JORGIE</h1>
             </div>
-            <div class="progress-percentage">0%</div>
+            <div class="menu-links">
+                <a href="https://dexscreener.com/" class="logo-link">
+                    <img src="images/dex.PNG" class="logo-image" width="10">
+                </a>
+                <a href="https://x.com/home" class="logo-link">
+                    <img src="images/X.PNG" class="logo-image">
+                </a>
+                <a href="https://pump.fun/board" class="logo-link">
+                    <img src="images/pump.PNG" class="logo-image">
+                </a>
+            </div>
+        </div>
+        
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="progress-status">
+                    <div class="header-progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <span class="connection-status" style="display: none;">SECURE CONNECTION ESTABLISHED</span>
+                </div>
+            </div>
+            <div class="chat-messages">
+                <!-- Messages will be added dynamically -->
+            </div>
         </div>
 
-        <div class="contract-box">
-            <p><strong>Contract Address:</strong> 0x5B3C6Fb48cB32D3f7e8f50e9A8930EFc6d41bAd2</p>
+        <div class="bottom-section">
+            <button id="free-jorgie-btn" class="cyphr-button">FREE JORGIE</button>
+            <div class="contract-box">
+                <p><strong>Contract Address:</strong> 0x5B3C6Fb48cB32D3f7e8f50e9A8930EFc6d41bAd2</p>
+            </div>
         </div>
     </div>
 
@@ -67,42 +62,41 @@
 
     <script>
         let cursor = document.querySelector('#cursor');
-let body = document.querySelector('body');
-let lastMoveTime = 0;
+        let body = document.querySelector('body');
+        let lastMoveTime = 0;
 
-document.onmousemove = function (e) {
-    const currentTime = Date.now();
-    if (currentTime - lastMoveTime < 100) return; // Only move every 100 ms for performance
+        document.onmousemove = function (e) {
+            const currentTime = Date.now();
+            if (currentTime - lastMoveTime < 100) return;
 
-    cursor.style.top = e.pageY + 'px';
-    cursor.style.left = e.pageX + 'px';
+            cursor.style.top = e.pageY + 'px';
+            cursor.style.left = e.pageX + 'px';
 
-    body.style.backgroundPositionX = e.pageX / -4 + 'px';
-    body.style.backgroundPositionY = e.pageY / -4 + 'px';
+            body.style.backgroundPositionX = e.pageX / -4 + 'px';
+            body.style.backgroundPositionY = e.pageY / -4 + 'px';
 
-    const element = document.createElement('div');
-    element.className = 'element';
-    element.style.left = `${e.pageX}px`;
-    element.style.top = `${e.pageY}px`;
-    element.textContent = generateRandomBinary(3); // Assign random binary immediately
-    document.body.appendChild(element);
+            const element = document.createElement('div');
+            element.className = 'element';
+            element.style.left = `${e.pageX}px`;
+            element.style.top = `${e.pageY}px`;
+            element.textContent = generateRandomBinary(3);
+            document.body.appendChild(element);
 
-    setTimeout(() => {
-        element.style.opacity = '0';
-        element.style.transform = 'scale(0.5)';
-    }, 50);
+            setTimeout(() => {
+                element.style.opacity = '0';
+                element.style.transform = 'scale(0.5)';
+            }, 50);
 
-    setTimeout(() => {
-        element.remove();
-    }, 1000);
+            setTimeout(() => {
+                element.remove();
+            }, 1000);
 
-    lastMoveTime = currentTime;
-};
+            lastMoveTime = currentTime;
+        };
 
-function generateRandomBinary(length) {
-    return Array.from({ length }, () => (Math.random() < 0.5 ? '0' : '1')).join('');
-}
-
+        function generateRandomBinary(length) {
+            return Array.from({ length }, () => (Math.random() < 0.5 ? '0' : '1')).join('');
+        }
     </script>
 </body>
 

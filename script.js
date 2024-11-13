@@ -12,11 +12,9 @@ const columns = canvas.width / fontSize;
 const drops = Array(Math.floor(columns)).fill(0);
 
 function drawMatrix() {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; // Background opacity
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Set the fill style for the letters with 50% transparency
-    ctx.fillStyle = "rgba(0, 255, 0, 0.5)"; 
+    ctx.fillStyle = "rgba(0, 255, 0, 0.5)";
     ctx.font = `${fontSize}px monospace`;
 
     drops.forEach((y, x) => {
@@ -32,94 +30,87 @@ function drawMatrix() {
 
 setInterval(drawMatrix, 35);
 
-// Typing effect with sound
-const terminalText = [
-    "welcome to matrix",
-    "encrypting...",
-    "processing",
-    "which pill you would take blue or red?"
+// Chat functionality
+const messages = [
+    { sender: 'jorgie', text: "Hey! Where are we going? I'm supposed to be with my mom!" },
+    { sender: 'officer', text: "We just need to keep you somewhere safe for now, little guy." },
+    { sender: 'jorgie', text: "But I'm already safe! My mom takes *great* care of me!" },
+    { sender: 'officer', text: "Sorry, JorgieBoy, rules are rules. You're coming with us." },
+    { sender: 'jorgie', text: "What?! Nooo! I'm not a bad monkey!" },
+    { sender: 'officer', text: "Sorry, bud. You're... under arrest." }
 ];
 
-let terminalIndex = 0;
-let charIndex = 0;
-const terminalElement = document.querySelector(".terminal");
+const chatMessages = document.querySelector('.chat-messages');
+const progressFill = document.querySelector('.progress-fill');
+const connectionStatus = document.querySelector('.connection-status');
+const headerProgressBar = document.querySelector('.header-progress-bar');
+let messageIndex = 0;
 
-const typingSound = new Audio("sounds/typing.mp3");
-typingSound.loop = true;
+function createMessage(message) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message');
+    if (message.sender === 'jorgie') {
+        messageDiv.classList.add('jorgie');
+    }
 
-function startTyping() {
-    // Reset indexes before starting
-    terminalIndex = 0;
-    charIndex = 0;
-    // Reset sound
-    typingSound.currentTime = 0;
-    typingSound.play().catch(error => console.log("Sound playback requires user interaction."));
-    typeText();
+    const profilePic = document.createElement('div');
+    profilePic.classList.add('profile-pic');
+    profilePic.style.backgroundImage = `url(images/${message.sender}.png)`;
+
+    const messageContent = document.createElement('div');
+    messageContent.classList.add('message-content');
+    messageContent.textContent = message.text;
+
+    if (message.sender === 'jorgie') {
+        messageDiv.appendChild(messageContent);
+        messageDiv.appendChild(profilePic);
+    } else {
+        messageDiv.appendChild(profilePic);
+        messageDiv.appendChild(messageContent);
+    }
+
+    return messageDiv;
 }
 
-function typeText() {
-    if (charIndex < terminalText[terminalIndex].length) {
-        terminalElement.innerHTML += terminalText[terminalIndex][charIndex];
-        charIndex++;
-        // Auto-scroll to the bottom
-        terminalElement.scrollTop = terminalElement.scrollHeight;
-        setTimeout(typeText, 50);
-    } else {
-        if (terminalIndex < terminalText.length - 1) {
-            terminalIndex++;
-            charIndex = 0;
-            terminalElement.innerHTML += "<br>"; // Add new line
-            // Auto-scroll to the bottom
-            terminalElement.scrollTop = terminalElement.scrollHeight;
-            setTimeout(typeText, 300);
-        } else {
-            typingSound.pause();
-            typingSound.currentTime = 0;
-        }
+function displayNextMessage() {
+    if (messageIndex < messages.length) {
+        const message = messages[messageIndex];
+        const messageElement = createMessage(message);
+        chatMessages.appendChild(messageElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        messageIndex++;
+        setTimeout(displayNextMessage, 2000);
     }
 }
 
-// Handle "CYPHR IT" button animation and progress
-const cyphrButton = document.querySelector('.cyphr-button');
-const progressBarContainer = document.querySelector('.progress-cubes-container');
-const percentageDisplay = document.querySelector('.progress-percentage');
+function startConnectionSequence() {
+    progressFill.style.width = '0%';
+    connectionStatus.style.display = 'none';
+    headerProgressBar.style.display = 'block';
+    chatMessages.innerHTML = '';
+    messageIndex = 0;
 
-// Create cubes dynamically inside the progress bar container
-const totalCubes = 20;
-for (let i = 0; i < totalCubes; i++) {
-    const cube = document.createElement('div');
-    cube.classList.add('progress-cube');
-    progressBarContainer.appendChild(cube);
-}
-
-function updateProgress(progress) {
-    const cubes = document.querySelectorAll('.progress-cube');
-    const percentage = Math.round(progress * 100);
-    let filledCubes = Math.round(progress * totalCubes);
-
-    cubes.forEach((cube, index) => {
-        cube.style.backgroundColor = index < filledCubes ? '#00ff00' : '#000';
-    });
-
-    percentageDisplay.textContent = `${percentage}%`;
-}
-
-// Button click logic to trigger progress, sound, and typing effect
-cyphrButton.addEventListener('click', () => {
-    // Reset progress
     let progress = 0;
-    updateProgress(0);  // Reset progress bar to 0
-    
-    // Clear terminal and reset typing
-    terminalElement.innerHTML = '';
-    startTyping();  // This now includes reset of indexes and sound
-
     const progressInterval = setInterval(() => {
-        if (progress < 1) {
-            progress += 0.05;
-            updateProgress(progress);
-        } else {
+        progress += 5;
+        progressFill.style.width = `${progress}%`;
+        
+        if (progress >= 100) {
             clearInterval(progressInterval);
+            setTimeout(() => {
+                headerProgressBar.style.display = 'none';
+                connectionStatus.style.display = 'block';
+                displayNextMessage();
+            }, 500);
         }
-    }, 500);
+    }, 50);
+}
+
+// Event Listeners
+document.getElementById('free-jorgie-btn').addEventListener('click', startConnectionSequence);
+
+// Handle window resize for Matrix effect
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 });

@@ -1,8 +1,4 @@
 /* Reset styles */
-
-
-
-
 * {
     margin: 0;
     padding: 0;
@@ -17,335 +13,277 @@
     font-style: normal;
 }
 
-h1 {
-    font-family: 'Courier New', Courier, monospace; /* Apply the custom font to the CYPHR heading */
-    font-size: 4rem; /* Adjust as needed */
-    color: #00FF00; /* Green, or adjust as needed */
-    text-align: center;
-    font-style: normal;
-}
-
-
-/* CURSOR DESIGN */
-
-
-/* CURSOR DESIGN */
-
-/* Logo styling */
-.logo-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.logo-image {
-    width: 150px; /* Adjust width as needed */
-    height: auto;
-}
-
-
-/* Fullscreen canvas for Matrix effect */
-#matrix {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Behind the content */
-    background-color: black;
-}
-
-/* Basic body styling */
+/* Updated body styling */
 body {
+    min-height: 100vh;
+    overflow: hidden;
     background-color: #0f0f0f;
     color: #00ff00;
     font-family: 'Courier New', Courier, monospace;
+    background: #222;
+    background-image: 
+        linear-gradient(to right, #333 1px, transparent 1px), 
+        linear-gradient(to bottom, #333 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+/* Matrix canvas */
+#matrix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: black;
+}
+
+/* Container styling */
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    z-index: 1;
+    justify-content: space-between;
+}
+
+/* Header section styling */
+.header-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo-and-title {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo-and-title .logo-image {
+    width: 80px;
+    height: auto;
+}
+
+.logo-and-title h1 {
+    margin: 0;
+    font-size: 3.5rem;
+    color: #00FF00;
+    text-shadow: 0 0 10px #00FF00;
+}
+
+/* Menu links styling */
+.menu-links {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    gap: 20px;
 }
 
-/* Container for content */
-.container {
-    text-align: center;
-    width: 80%;
-    max-width: 900px;
-    z-index: 1; /* Ensure it's above the canvas */
-}
-
-/* Title styling */
-h1 {
-    font-size: 3em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-}
-
-/* Menu links */
-.menu a {
-    color: #00ff00;
-    text-decoration: none;
-    font-size: 1.2em;
-    margin: 0 15px;
+.menu-links .logo-link {
     display: inline-block;
-    padding: 5px;
-    transition: background-color 0.3s;
+    padding: 10px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
 }
 
-.menu a:hover {
-    background-color: #00ff00;
-    color: #0f0f0f;
+.menu-links .logo-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+    transition: box-shadow 0.3s ease-in-out;
 }
 
-/* System and copyright info */
-.system-info, .copyright, .server-status {
-    font-size: 0.9em;
-    margin-top: 10px;
+.menu-links .logo-link:hover {
+    transform: scale(1.1);
 }
 
-/* Terminal window look */
-.terminal {
+.menu-links .logo-link:hover .logo-image {
+    box-shadow: 0 0 20px #00ff00;
+}
+
+/* Chat container styles */
+.chat-container {
     background-color: rgba(0, 0, 0, 0.8);
     color: #00FF00;
-    font-family: 'Courier New', monospace;
-    padding: 10px;
+    padding: 15px;
     border: 2px solid #00FF00;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-    width: 80%;
-    margin: 0 auto;
-    height: 120px; /* Increased height */
-    font-size: 20px;
-    white-space: pre-wrap;
-    overflow-y: auto; /* Enable vertical scrolling */
-    scroll-behavior: smooth; /* Smooth scrolling */
-}
-
-/* Style the scrollbar */
-.terminal::-webkit-scrollbar {
-    width: 8px;
-}
-
-.terminal::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.8);
-}
-
-.terminal::-webkit-scrollbar-thumb {
-    background: #00FF00;
-    border-radius: 4px;
-}
-
-.terminal::-webkit-scrollbar-thumb:hover {
-    background: #00CC00;
-}
-
-/* Modify the paragraph style to allow wrapping */
-.terminal p {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 18px;
-    color: #00ff00;
-    margin: 0;
-    white-space: pre-wrap; /* Changed from nowrap to pre-wrap */
-    width: 100%;
-}
-
-/* Hover effect for terminal commands */
-.terminal p:hover {
-    background-color: #00ff00;
-    color: #0f0f0f;
-    padding-left: 10px;
-}
-
-/* Body Styling */
-/* 90s Retro Technocratic Font Style */
-body {
-    background-color: black;
-    font-family: 'Courier New', Courier, monospace; /* Monospaced font for retro hacker feel */
-    margin: 0;
-    padding: 0;
-    height: 100vh;
+    height: 45vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    width: 60%; /* Adjust this percentage to your liking */
+    margin: 0 auto;
 }
 
-/* Button Container Styling */
-.button-container {
+.chat-header {
     text-align: center;
-    position: relative;
-    margin-top: 50px; /* Space from the content above */
+    padding: 8px;
+    border-bottom: 1px solid #00FF00;
+    margin-bottom: 10px;
 }
 
-/* Glowing Green Button with Retro Effect */
+.chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Message styling */
+.message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: messageAppear 0.5s forwards;
+}
+
+.message.jorgie {
+    justify-content: flex-end;
+}
+
+.profile-pic {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid #00FF00;
+    margin: 0 8px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    background-size: cover;
+    background-position: center;
+}
+
+.message-content {
+    background: rgba(0, 255, 0, 0.1);
+    padding: 8px 12px;
+    border-radius: 15px;
+    border: 1px solid #00FF00;
+    max-width: 70%;
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+/* Bottom section styling */
+.bottom-section {
+    text-align: center;
+    margin-top: auto;
+}
+
+/* Button styling */
 .cyphr-button {
     background-color: black;
-    color: #00ff00; /* Green color for text */
+    color: #00ff00;
     font-weight: bold;
-    padding: 20px 40px;
+    padding: 15px 30px;
     border: 2px solid #00ff00;
-    font-size: 24px; /* Larger font for more impact */
-    cursor: default;
+    font-size: 20px;
+    cursor: pointer;
     text-transform: uppercase;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.6), 0 0 20px rgba(0, 255, 0, 0.4);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
     transition: all 0.3s ease;
-    z-index: 1;
-    font-family: 'Courier New', monospace; /* Retro, monospaced font */
-    letter-spacing: 2px; /* Added space between letters for a 90s tech look */
-    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 40px #00ff00, 0 0 80px #00ff00; /* Glowing text */
-    animation: zoomInOut 2s infinite, glitchEffect 1s infinite; /* Added glitch animation */
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+    text-shadow: 0 0 5px #00ff00;
+    margin-bottom: 15px;
 }
 
-
-
-/* Button Hover Effect */
 .cyphr-button:hover {
     background-color: #00ff00;
     color: black;
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.9), 0 0 30px rgba(0, 255, 0, 0.8);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.9);
 }
 
-/* Green outline progress bar container */
-.progress-bar {
-    width: 100%;
-    height: 40px;
-    border: 2px solid #00ff00; /* Green border */
-    position: relative;
-    margin-top: 20px;
-    background-color: black;
-    overflow: hidden;
-}
-
-/* Container for the cubes */
-.progress-cubes-container {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: repeat(20, 1fr); /* 20 cubes in a row */
-    grid-template-rows: 1fr; /* Single row of cubes */
-    gap: 2px; /* Space between cubes */
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-/* Style for each cube */
-.progress-cube {
-    width: 100%;
-    height: 100%;
-    background-color: #000; /* Default background (off) */
-    transition: background-color 0.5s ease; /* Smooth transition for filling */
-}
-
-/* Text displaying the percentage */
-.progress-percentage {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 18px;
-    color: #00ff00;
-    font-family: 'Courier New', Courier, monospace;
-    z-index: 2;
-    pointer-events: none; /* Prevent interfering with the button clicks */
-}
-
+/* Contract box styling */
 .contract-box {
     padding: 10px;
-    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.8);
     color: #00FF00;
     border: 2px solid #00FF00;
-    margin-top: 20px;
+    font-size: 0.9em;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    width: fit-content; /* This will make it fit the content */
+    margin: 15px auto;
 }
 
-
-
-/* *******************************CURSOR CODE ******************************************* */
-
-@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+/* Progress bar styling */
+.header-progress-bar {
+    width: 100%;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #00ff00;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 0 auto;
 }
 
-body {
-  min-height: 100vh;
-  overflow: hidden;
-  background: #222;
-  background-image: 
-    linear-gradient(to right, #333 1px, transparent 1px), 
-    linear-gradient(to bottom, #333 1px, transparent 1px);
-  background-size: 40px 40px;
-  
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: #00ff00;
+    box-shadow: 0 0 10px #00ff00;
+    transition: width 0.5s ease-out;
 }
 
-
-
-
-body:hover #cursor {
-  transform: translate(-1px, 5px) rotate(15deg) scale(1);
+.connection-status {
+    display: none;
+    animation: glowText 1.5s ease-in-out infinite alternate;
 }
 
+/* Scrollbar styling */
+.chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
 
+.chat-messages::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.8);
+}
 
+.chat-messages::-webkit-scrollbar-thumb {
+    background: #00FF00;
+    border-radius: 3px;
+}
 
+/* Animations */
+@keyframes messageAppear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
+@keyframes glowText {
+    from {
+        text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+    }
+    to {
+        text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+    }
+}
+
+/* Element styling for binary trail */
 .element {
     position: absolute;
     transform: translate(-50%, -50%);
-    color: #FFFFFF; /* White color */
+    color: #FFFFFF;
     pointer-events: none;
     width: 10px;
     height: 10px;
     transition: 1s;
     filter: drop-shadow(0 0 10px #FFFFFF) drop-shadow(0 0 30px #FFFFFF) hue-rotate(0deg);
 }
-  
- 
-  
-  button, a {
-    cursor: none; /* Hide the default pointer cursor */
-}
 
-
-
-/* *******************************CURSOR CODE ******************************************* */
-
-
-
-
-/* CSS for logo circular green glow */
-.menu-links {
-    display: flex;
-    justify-content: center;
-    gap: 20px; /* Adjust the spacing between logos */
-}
-
-.menu-links .logo-link {
-    display: inline-block;
-    padding: 10px; /* Space around the logo to give room for the glow */
-    border-radius: 50%; /* Ensures the logos remain circular */
-    transition: transform 0.3s ease; /* Smooth scale effect */
-}
-
-.menu-links .logo-link:hover {
-    transform: scale(1.1); /* Slightly zoom in on hover for a dynamic effect */
-}
-
-.menu-links .logo-image {
-    display: block;
-    width: 50px; /* Adjust the size of the logo */
-    height: 50px; /* Adjust the size of the logo */
-    border-radius: 50%; /* Makes sure the image stays circular */
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.7), 0 0 20px rgba(0, 255, 0, 0.7); /* Green glow effect */
-    transition: box-shadow 0.3s ease-in-out; /* Smooth transition for the glow effect */
-}
-
-.menu-links .logo-link:hover .logo-image {
-    box-shadow: 0 0 20px rgba(0, 255, 0, 1), 0 0 30px rgba(0, 255, 0, 1); /* Brighter glow on hover */
+/* Cursor styling */
+button, a {
+    cursor: none;
 }
