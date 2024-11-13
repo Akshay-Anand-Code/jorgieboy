@@ -62,12 +62,13 @@ body {
 .logo-and-title {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 30px;
 }
 
 .logo-and-title .logo-image {
-    width: 80px;
-    height: auto;
+    width: 120px; /* Increased from 80px */
+    height: 120px; /* Added to maintain aspect ratio */
+    object-fit: cover; /* Ensures image fills the space properly */
 }
 
 .logo-and-title h1 {
@@ -286,4 +287,26 @@ body {
 /* Cursor styling */
 button, a {
     cursor: none;
+}
+
+
+.title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title-container h1 {
+    margin: 0;
+    font-size: 3.5rem;
+    color: #00FF00;
+    text-shadow: 0 0 10px #00FF00;
+    letter-spacing: 5px; /* Adds spacing between letters */
+}
+
+.subtitle {
+    color: #00FF00;
+    font-size: 1.2rem;
+    margin-top: 5px;
+    text-shadow: 0 0 5px #00FF00;
 }
