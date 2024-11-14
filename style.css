@@ -63,6 +63,9 @@ body {
     display: flex;
     align-items: center;
     gap: 30px;
+    justify-content: center; /* Added */
+    width: 100%; /* Added */
+    padding-right: 120px;
 }
 
 .logo-and-title .logo-image {
@@ -294,6 +297,7 @@ button, a {
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: fit-content;
 }
 
 .title-container h1 {
